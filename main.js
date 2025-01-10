@@ -199,7 +199,7 @@ function verificarCursos(){
     let tabla_frecuencias_si_no_porcentaje = normalizar_pregutna_binaria_miltiple(tabla_frecuencias_si_no,data_curso(nombre[2],data,nombre[0]).length)
     curso = curso.concat(nombre)
     Object.keys(tabla_frecuencias_si_no_porcentaje).slice().forEach((a)=>{
-      curso = curso.concat([ tabla_frecuencias_si_no_porcentaje[a]]+ "%")
+      curso = curso.concat([tabla_frecuencias_si_no_porcentaje[a]]+ "%")
     
     }
     
@@ -331,16 +331,15 @@ function agregarAreas(){
   const data = hoja_raw.getDataRange().getValues();
   const hoja_maestro = hojasActuales.getSheetByName('CATALOGO');
   const data_maestro = hoja_maestro.getDataRange().getValues();
-  if(data[0][data.length-1]!="AREA"){
-  data[0].push("AREA")}
-  const encabezado = data[0]
+  
   data.shift();
   
-  const data_con_areas=[encabezado,...agregar_areas(data,data_maestro)]
+  const areas=agregar_areas(data,data_maestro)
   
   
   
-  hoja_raw.getRange(1, 1, data_con_areas.length, data_con_areas[0].length).setValues(data_con_areas);
+  const columnaArea=obtenerNumeroDeColumna(hoja_raw,"Question 26",1)+2
+  escribirListaEnColumna(hoja_raw,["AREA"].concat(areas),columnaArea,1)
   
 
 

@@ -178,7 +178,7 @@ function tabla_frecuencias_tabla_binaria_multiple(data_profesor,col1,escala){
 
     const notas = data_profesor.map((a)=>{
       
-      
+      console.log(a)
       return a[col].split(',').map(Number)})
     
     notas.forEach((a)=>{
@@ -264,7 +264,7 @@ function agregar_areas(data_raw,data_maestro){
     
     if(area){
       
-      return elemento.concat([area[3]])
+      return area[3]
     }
     else{
       if(elemento[0].slice(0,3)=="ICI"){
@@ -281,14 +281,16 @@ function agregar_areas(data_raw,data_maestro){
       }
       else if(elemento[0].slice(0,3)=="IOC"){
         area="OBRAS CIVILES"
+      }else if(elemento[0].slice(0,3)=="INM"){
+        area="AMBIENTAL"
       }
       else{
         area=""
         console.log("fallido",elemento[0].slice(0,3),elemento)
       }
       
-      elemento.push(area)
-      return elemento
+      
+      return area
     }
     
   })

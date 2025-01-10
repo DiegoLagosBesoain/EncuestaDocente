@@ -50,22 +50,25 @@ function escribir_resultado_pregunta_ponderada5(informaciones, sheet,descripcion
 
   // Formatear los valores en la columna 3 (índice 3 desde 0)
   informaciones3.forEach((fila, i) => {
-     // Ignorar el encabezado
-      fila[3] = fila[3].replace(".", ","); // Redondear y reemplazar punto con coma
-    
-  });
+    // Ignorar el encabezado
+    if (i > 0) {
+        informaciones3[i] = fila.map((elemento, idx) => 
+            idx > 2 ? elemento.replace(".", ",") : elemento
+        ); // Redondear y reemplazar punto con coma
+    }
+});
 
   // Ajustar el rango para coincidir con el número de columnas
   sheet.getRange(2, 1, 1, 1).setValue(descripcion_pregunta).setBackground("#6e92f5")
   sheet.getRange(2, 1, 1, 4).setBackground("#6e92f5")
-  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5")
-  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3);
+  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5");
+  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3).createFilter();
 }
 function escribir_resumen_y_destacar_deficientes(resumen, hoja, preguntas, lista_bool) {
   const encabezado = ["Nombre_profesor", "UniqueID", "Nombre_curso", ...preguntas, "Promedio"];
   resumen = [encabezado, ...resumen];
  
-  hoja.getRange(1, 1, 1, encabezado.length).setBackground("#6e92f5")
+  hoja.getRange(1, 1, 1, encabezado.length).setBackground("#6e92f5").createFilter();
   resumen.forEach((fila, i) => {
     fila.forEach((valor, j) => {
       const rango = hoja.getRange(i + 1, j + 1); // Celda en la fila `i+1` y columna `j+1`
@@ -75,7 +78,7 @@ function escribir_resumen_y_destacar_deficientes(resumen, hoja, preguntas, lista
         rango.setNumberFormat("0,00"); // Formato con 2 decimales
       } else if (typeof valor === "string" && valor.includes("%")) {
         rango.setValue(parseFloat(valor) / 100); // Convertir porcentaje si es cadena
-        rango.setNumberFormat("0.00%"); // Formato de porcentaje
+        rango.setNumberFormat("0,00%"); // Formato de porcentaje
       } else if (typeof valor === "string" && valor.includes(".")) {
         // Reemplazar puntos decimales con comas
         const valorConComa = valor.replace(".", ",");
@@ -110,16 +113,19 @@ const informaciones2 = [encabezado, ...informaciones];
 
   // Formatear los valores en la columna 3 (índice 3 desde 0)
   informaciones3.forEach((fila, i) => {
-     // Ignorar el encabezado
-      fila[3] = fila[3].replace(".", ","); // Redondear y reemplazar punto con coma
-    
-  });
+    // Ignorar el encabezado
+    if (i > 0) {
+        informaciones3[i] = fila.map((elemento, idx) => 
+            idx > 2 ? elemento.replace(".", ",") : elemento
+        ); // Redondear y reemplazar punto con coma
+    }
+});
 
   // Ajustar el rango para coincidir con el número de columnas
   sheet.getRange(2, 1, 1, 1).setValue(descripcion_pregunta).setBackground("#6e92f5")
   sheet.getRange(2, 1, 1, 4).setBackground("#6e92f5")
-  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5")
-  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3);
+  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5");
+  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3).createFilter();
 
 
 
@@ -138,10 +144,18 @@ const informaciones3 = informaciones2.filter((lista) => {
     }
     return true;
   });
+informaciones3.forEach((fila, i) => {
+    // Ignorar el encabezado
+    if (i > 0) {
+        informaciones3[i] = fila.map((elemento, idx) => 
+            idx > 2 ? elemento.replace(".", ",") : elemento
+        ); // Redondear y reemplazar punto con coma
+    }
+})
 sheet.getRange(2, 1, 1, 1).setValue(descripcion_pregunta).setBackground("#6e92f5")
 sheet.getRange(2, 1, 1, 4).setBackground("#6e92f5")
-sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5")
-sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3)    ;    
+sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5");
+sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3).createFilter()    ;    
        
 
 
@@ -160,10 +174,18 @@ const informaciones3 = informaciones2.filter((lista) => {
     }
     return true;
   });
+informaciones3.forEach((fila, i) => {
+    // Ignorar el encabezado
+    if (i > 0) {
+        informaciones3[i] = fila.map((elemento, idx) => 
+            idx > 2 ? elemento.replace(".", ",") : elemento
+        ); // Redondear y reemplazar punto con coma
+    }
+})
 sheet.getRange(2, 1, 1, 1).setValue(descripcion_pregunta).setBackground("#6e92f5")
 sheet.getRange(2, 1, 1, 4).setBackground("#6e92f5")
-sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5")
-sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3)
+sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5");
+sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3).createFilter()
 
 
 
@@ -183,20 +205,38 @@ const informaciones3 = informaciones2.filter((lista) => {
     }
     return true;
   });
-
+  informaciones3.forEach((fila, i) => {
+    // Ignorar el encabezado
+    if (i > 0) {
+        informaciones3[i] = fila.map((elemento, idx) => 
+            idx > 2 ? elemento.replace(".", ",") : elemento
+        ); // Redondear y reemplazar punto con coma
+    }
+})
 
   // Ajustar el rango para coincidir con el número de columnas
   sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3);
   sheet.getRange(2, 1, 1, 1).setValue(descripcion_pregunta).setBackground("#6e92f5")
   sheet.getRange(2, 1, 1, 4).setBackground("#6e92f5")
-  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5")
-  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3) 
+  sheet.getRange(4, 1, 1, informaciones3[0].length).setBackground("#6e92f5");
+  sheet.getRange(4, 1, informaciones3.length, informaciones3[0].length).setValues(informaciones3).createFilter()
 
 
 
 
 
 
+}
+function escribirListaEnColumna(hoja,lista, columna, filaInicial) {
+    // Obtén la hoja activa
+    
+    
+    // Define el rango donde escribir la lista
+    const rango = hoja.getRange(filaInicial, columna, lista.length, 1);
+    
+    // Escribe los valores en la columna
+    const valores = lista.map(item => [item]); // Convierte la lista en formato de matriz (una columna)
+    rango.setValues(valores); // Escribe los valores en la hoja
 }
 
 
