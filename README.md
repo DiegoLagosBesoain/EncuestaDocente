@@ -30,8 +30,6 @@ A continuación se presentan la instalación, los requisitos y el modo de uso pa
 
 - Si las hojas no existen o tienen nombres incorrectos, el programa no funcionará correctamente y mostrará errores.  
 - Se recomienda copiar y pegar los datos desde una hoja de Google Sheets que abra el archivo .csv de `RawData`, en lugar de hacerlo desde Excel, para evitar posibles cambios en los tipos de datos (por ejemplo, convertir valores de la columna "Question 4" en fechas).  
-- Cada vez que se realiza la separación por áreas, se crea un nuevo archivo. Es importante evitar generar demasiadas copias en el Drive personal.
+- Cada vez que se realiza la separación por áreas, se crea un nuevo archivo. Es importante para evitar generar demasiadas copias en el Drive personal.
 
-- De no existir las hojas o tener un nombre diferente el programa no podra funcionar de manera incorrecta y llevara a un error
-- Es recomendable realziar un copiado y pegado desde una hoja de google sheets que abra el .csv que contiene RawData y no desde un Exel ya que podria cambiar el tipo de los datos(por ejemplo cambiar los resultados de la columan Question 4 a fechas)
-- Cada vez que se realzia la separacion por areas se crea un nuevo archivo hay que tener cuidado con crear muchas copias en el dirve propio
+
